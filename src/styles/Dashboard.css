@@ -1,0 +1,10 @@
+.header {
+  height: 7.0em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.dashboard-heading {
+  padding-left: 15%;
+}

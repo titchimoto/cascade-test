@@ -1,0 +1,47 @@
+.month-container {
+  height: 5.0rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.select-month {
+  text-align: center;
+}
+
+.month-button {
+  color: #7d7d7d;
+  text-transform: uppercase;
+  cursor: pointer;
+  font-family: 'Roboto Condensed', sans-serif;
+  font-size: 1.4rem;
+  padding: 0 20px;
+}
+
+.month-button:hover {
+  border-bottom: solid 4px #64a6c4 !important;
+}
+
+.count-containers {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.count-tile {
+  width: 30%;
+  height: 390px;
+  color: #ffffff;
+  background-color: #4dafe2;
+  padding: 20px;
+  margin: 20px;
+  border-radius: 20px;
+}
+
+.loading-spinner {
+  text-align: center;
+}
+
+
+@import url('https://fonts.googleapis.com/css?family=Roboto+Condensed');

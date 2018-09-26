@@ -1,0 +1,31 @@
+p {
+  margin-bottom: 20px;
+}
+
+.circle-container {
+  height: 15.0em;
+  width: 15.0em;
+  background-color: #8bc63f;
+  border-radius: 50%;
+  margin: auto;
+}
+
+.count-title {
+  text-align: center;
+  color: #ffffff;
+}
+
+.month-name {
+  text-align: center;
+  color: #ffffff;
+}
+
+.count-details {
+  text-align: center;
+  padding: 2% 0;
+}
+
+.count-data {
+  font-size: 4.0rem;
+  color: #ffffff;
+}
