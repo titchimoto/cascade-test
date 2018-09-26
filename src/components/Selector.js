@@ -44,7 +44,7 @@ class Selector extends Component {
       // digits i.e '07'
       i < 10 ? i = '0' + i : i
 
-    await fetch(proxy + darkSkyApi + `${process.env.REACT_APP_DARK_SKY_KEY}/37.8267,-122.4233,2018-${this.state.monthNumber}-${i}T00:00:00`)
+    await fetch(proxy + darkSkyApi + `${process.env.REACT_APP_DARK_SKY_KEY}/45.5898,-122.5951,2018-${this.state.monthNumber}-${i}T00:00:00`)
       .then(this.checkStatus)
       .then(this.parseJSON)
       .then(data => {
