@@ -10,7 +10,7 @@ class Selector extends Component {
     this.state = {
       hourlyData: [],
       daysInSelectedMonth: 31,
-      monthNumber: '00',
+      monthNumber: '',
       monthName: '',
       daysHeatingTurnedOn: 0,
       daysACTurnedOn: 0,
@@ -30,8 +30,8 @@ class Selector extends Component {
       daysHeatingTurnedOn: 0,
       daysACTurnedOn: 0,
       hourlyData: []
-    });
-    this.getData();
+    },
+    () => this.getData());
   }
 
   async getData() {
@@ -44,19 +44,27 @@ class Selector extends Component {
       // digits i.e '07'
       i < 10 ? i = '0' + i : i
 
-    await fetch(proxy + darkSkyApi + `${process.env.REACT_APP_DARK_SKY_KEY}/45.5898,-122.5951,2018-${this.state.monthNumber}-${i}T00:00:00`)
-      .then(this.checkStatus)
-      .then(this.parseJSON)
-      .then(data => {
-        // First get all hourly data
+      try {
+        // First, grab the requested day from the Dark Sky API
+        const response = await fetch(proxy + darkSkyApi + `${process.env.REACT_APP_DARK_SKY_KEY}/45.5898,-122.5951,2018-${this.state.monthNumber}-${i}T00:00:00`)
+
+        // Next, using our helper function, check the status of the response
+        this.checkStatus(response);
+
+        // If all is well, retrieve the json data from the response.
+        const data = await response.json();
+
+        // Update our state with the newly fetched data
         this.setState({
           hourlyData: data.hourly.data
         });
+
         // Then iterate over that day and see if Heating or AC turned on at all.
         this.calculateIfTurnedOnOnce(this.state.hourlyData);
-      }).catch(function(error) {
-        console.log('request failed', error);
-      });
+
+      } catch(error) {
+        console.error(error);
+      }
     }
     this.setState({ isLoading: false });
   }
@@ -82,7 +90,7 @@ class Selector extends Component {
       }));
   }
 
-  // The following two methods are simple helper methods to help tidy up
+  // The following method is a simple helper method to help tidy up
   // and modularize the async/await call from the API.
   checkStatus = response => {
     if (response.ok) {
@@ -94,18 +102,16 @@ class Selector extends Component {
     }
   }
 
-  parseJSON = res => res.json();
-
   render() {
     return(
       <div>
         <h3 className="select-month">Please select a month: </h3>
           <div className="month-container">
-            <div className="month-button" onClick={() => this.handleMonthChange('01', 31, "January") }>January</div>
+            <div className="month-button" onClick={() => this.handleMonthChange('01', 3, "January") }>January</div>
             <div className="month-button" onClick={() => this.handleMonthChange('02', 28, "February") }>February</div>
             <div className="month-button" onClick={() => this.handleMonthChange('02', 31, "March") }>March</div>
             <div className="month-button" onClick={() => this.handleMonthChange('04', 30, "April") }>April</div>
-            <div className="month-button" onClick={() => this.handleMonthChange('05', 31, "May") }>May</div>
+            <div className="month-button" onClick={() => this.handleMonthChange('05', 3, "May") }>May</div>
           </div>
 
           { !this.state.idleState ?
