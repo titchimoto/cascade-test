@@ -107,11 +107,11 @@ class Selector extends Component {
       <div>
         <h3 className="select-month">Please select a month: </h3>
           <div className="month-container">
-            <div className="month-button" onClick={() => this.handleMonthChange('01', 3, "January") }>January</div>
+            <div className="month-button" onClick={() => this.handleMonthChange('01', 31, "January") }>January</div>
             <div className="month-button" onClick={() => this.handleMonthChange('02', 28, "February") }>February</div>
             <div className="month-button" onClick={() => this.handleMonthChange('02', 31, "March") }>March</div>
             <div className="month-button" onClick={() => this.handleMonthChange('04', 30, "April") }>April</div>
-            <div className="month-button" onClick={() => this.handleMonthChange('05', 3, "May") }>May</div>
+            <div className="month-button" onClick={() => this.handleMonthChange('05', 31, "May") }>May</div>
           </div>
 
           { !this.state.idleState ?
